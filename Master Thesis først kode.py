@@ -10,7 +10,7 @@ import numpy as np   # For numerical operations and array handling
 import matplotlib.pyplot as plt  # For plotting
 
 # Open the HDF5 file. Adjust the path if necessary.
-filename = r"E:\Petroula Zygogianni\Master thesis\NorSat-1-POBC-LPR-20180315.tar/NorSat-1-POBC-LPR-20180315_00-c.h5f"
+filename = r"file_path"
 f = h5py.File(filename, 'r')
 
 # Print out the keys (top-level groups/datasets) in the file to see its structure.
@@ -22,12 +22,10 @@ print("Keys in the file:", list(f.keys()))
 
 import h5py
 
-filename = r"E:\Petroula Zygogianni\Master thesis\NorSat-1-POBC-LPR-20180315.tar/NorSat-1-POBC-LPR-20180315_00-c.h5f"
+filename = r"file_path"
 
 def explore_h5(group, prefix=''):
-    """
-    Εκτυπώνει όλα τα datasets και groups με το όνομα, το σχήμα και τον τύπο τους
-    """
+    
     for key in group.keys():
         item = group[key]
         name = f"{prefix}/{key}" if prefix else key
@@ -35,7 +33,7 @@ def explore_h5(group, prefix=''):
             print(f"Dataset: {name}, shape: {item.shape}, dtype: {item.dtype}")
         elif isinstance(item, h5py.Group):
             print(f"Group: {name}")
-            explore_h5(item, prefix=name)  # επανάκληση για subgroups
+            explore_h5(item, prefix=name) 
 
 with h5py.File(filename, 'r') as f:
     print("Top-level keys:", list(f.keys()))
@@ -49,7 +47,7 @@ with h5py.File(filename, 'r') as f:
 import h5py
 import numpy as np
 
-file_path = r"E:\Petroula Zygogianni\Master thesis\NorSat-1-POBC-LPR-20180315.tar/NorSat-1-POBC-LPR-20180315_00-c.h5f"
+file_path = r"file_path"
 
 with h5py.File(file_path, 'r') as f:
     # Loop through each bias dataset
@@ -78,13 +76,13 @@ import os
 e = 1.602e-19       # Elementary charge [C]
 kB = 1.381e-23      # Boltzmann constant [J/K]
 me = 9.109e-31      # Electron mass [kg]
-Te = 3000           # Assumed electron temperature in Kelvin (~0.26 eV)
+Te = 2000           # Assumed electron temperature in Kelvin (~0.26 eV)
 beta = 0.5          # Exponent from OML theory
 
 # -------------------------------
 # Folder containing 24 HDF5 files
 # -------------------------------
-folder_path = r"E:\Petroula Zygogianni\Master thesis\NorSat-1-POBC-LPR-20180315.tar"
+folder_path = r"folder_path"
 
 # -------------------------------
 # Build file list (00 to 23)
@@ -143,14 +141,17 @@ import matplotlib.pyplot as plt
 e = 1.602e-19       # Elementary charge [C]
 kB = 1.381e-23      # Boltzmann constant [J/K]
 me = 9.109e-31      # Electron mass [kg]
-Te = 3000           # Assumed electron temperature in Kelvin (~0.26 eV)
-A = 1.0             # Probe area in arbitrary units
+Te = 2000           # Assumed electron temperature in Kelvin (~0.26 eV)
+# Probe dimensions (NorSat-1 m-NLP)
+d = 0.0005          # diameter [m]
+L = 0.025           # length [m]
+A = L * np.pi * d   # probe area [m^2]
 beta = 0.5          # Exponent from OML theory
 
 # -------------------------------
 # 2. File path
 # -------------------------------
-file_path = r"E:\Petroula Zygogianni\Master thesis\NorSat-1-POBC-LPR-20180315.tar/NorSat-1-POBC-LPR-20180315_01-c.h5f"
+file_path = r"file_path"
 
 # -------------------------------
 # 3. Open HDF5 file and read data
@@ -195,9 +196,6 @@ plt.ylim(-1.8e10, 7.3e12)  # <-- fixed global scale
 plt.grid(True)
 plt.tight_layout()
 plt.show()
-
-
-# In[ ]:
 
 
 
